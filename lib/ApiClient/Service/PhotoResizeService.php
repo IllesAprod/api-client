@@ -100,20 +100,21 @@ class PhotoResizeService
         $requests = array();
 
         foreach ($photosByOwnId as $ownId => $photo) {
-            $path = $photo['location'];
-
-            if ($paralellDownload && 'http' == substr(strtolower($path), 0, 4)) {
-                $requests[$ownId] = $this->client->get($path);
-            } else {
-                try {
-                    $results[$ownId] = $this->getResizedPhotoData($path);
-                } catch (\Exception $e) {
-                    $results[$ownId] = $e;
-                }
-            }
+//            $path = $photo['location'];
+//
+//            if ($paralellDownload && 'http' == substr(strtolower($path), 0, 4)) {
+//                $requests[$ownId] = $this->client->get($path);
+//            } else {
+//                try {
+//                    $results[$ownId] = $this->getResizedPhotoData($path);
+//                } catch (\Exception $e) {
+//                    $results[$ownId] = $e;
+//                }
+//            }
+            $results[$ownId] = $photo['binData'];
         }
 
-        $results = $results + $this->getResizedPhotosDataByRequests($requests);
+        //$results = $results + $this->getResizedPhotosDataByRequests($requests);
 
         return $results;
     }
